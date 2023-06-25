@@ -1,1 +1,0 @@
-const KEYSTORE_PASSWORD: &str = "STRONG_PASSWORD";

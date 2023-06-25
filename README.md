@@ -25,12 +25,20 @@ Hex Wallet Gen is a native Rust library that provides functionality for generati
 
 ## [setup]
 
-- `cargo build --release`
+- Update the `KEYCHAIN_PASSWORD` in the [keychain.rs](https://github.com/Sssilencee/hex-wallet-gen/blob/main/src/types/keychain.rs) file with your own password.
+```Rust
+const KEYCHAIN_PASSWORD: &str = "STRONG_PASSWORD";
+```
+
+- Build `cdylib` file
+```console
+cargo build --release
+```
 
 
 ## [examples]
 
-Here simple example of library using on Go using CGO
+Here's a simple example of a library using with CGO:
 
 ### [[main.go](https://github.com/Sssilencee/hex-wallet-gen/blob/main/service/main.go)]
 
