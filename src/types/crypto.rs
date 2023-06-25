@@ -6,9 +6,9 @@ use rand::Rng;
 use scrypt::{
     password_hash::{
         rand_core::OsRng,
-        SaltString
+        SaltString,
     },
-    Params
+    Params,
 };
 use secp256k1::hashes::{
     sha256::Hash as Sha256Hash, 
@@ -17,6 +17,11 @@ use secp256k1::hashes::{
 use serde::Serialize;
 use sha3::{Digest, Keccak256};
 
+
+const SCRYPT_DK_LEN: usize = 64;
+const SCRYPT_N: u8 = 13;
+const SCRYPT_R: u32 = 8;
+const SCRYPT_P: u32 = 8;
 
 #[derive(Serialize)]
 pub struct CipherParams {
@@ -57,10 +62,10 @@ impl KdfParams {
         salt.decode_b64(&mut salt_bytes).unwrap();
 
         Self { 
-            dklen: 64, 
-            n: 13, 
-            r: 8, 
-            p: 8, 
+            dklen: SCRYPT_DK_LEN, 
+            n: SCRYPT_N, 
+            r: SCRYPT_R, 
+            p: SCRYPT_P, 
             salt: hex::encode(salt.as_str()),
             salt_bytes: salt_bytes
         }

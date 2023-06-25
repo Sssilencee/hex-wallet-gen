@@ -7,6 +7,8 @@ use super::{
 };
 
 
+const KEYCHAIN_PASSWORD: &str = "STRONG_PASSWORD";
+
 #[derive(Serialize)]
 pub struct Keychain<'a> {
     pub address: String,
@@ -60,7 +62,7 @@ impl <'a> Keychain<'a> {
             address: address,
             crypto: Crypto::new_aes_128_ctr(
                 secret_key, 
-                "PASSWORD".into()
+                KEYCHAIN_PASSWORD.into()
             )
         })
     }
