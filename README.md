@@ -72,3 +72,27 @@ typedef enum {
 
 extern char* generate_keychain(Network);
 ```
+
+### [output example]
+
+```json
+{
+  "address": "0x3a2b1e3f3f592b36712b17f7c5432fc7836c064a",
+  "crypto": {
+    "cipher": "aes-128-ctr",
+    "cipherparams": {
+      "iv": "78f5925158c95e9730b450eb61c25017"
+    },
+    "ciphertext": "905087fb2cb283a3c455c955d98a9ebd3156f5b6a83b9efd1daea0eaaa897e3d",
+    "kdf": "scrypt",
+    "kdfparams": {
+      "dklen": 64,
+      "n": 13,
+      "r": 8,
+      "p": 8,
+      "salt": "7a6d3444574766484858464e2b5a4f72444b744b6967"
+    },
+    "mac":"9c65f0804b1904e0f1034861c717e864dc03220cf7190a646137e0e2990e8f4a"
+  }
+}
+```
