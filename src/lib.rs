@@ -11,7 +11,7 @@ use std::ffi::{c_char, CString};
 
 
 #[no_mangle]
-pub extern "C" fn generate_keychain(network: Network) -> *const c_char {
+pub extern "C" fn generate_keychain(network: Network) -> *mut c_char {
     let keychain = match network {
         Network::Evm |
         Network::Trx | 
@@ -34,4 +34,12 @@ pub extern "C" fn generate_keychain(network: Network) -> *const c_char {
     )
         .unwrap()
         .into_raw()
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn free_c_char(ptr: *mut c_char) {
+    if ptr.is_null() {
+        return;
+    }
+    let _ = CString::from_raw(ptr);
 }

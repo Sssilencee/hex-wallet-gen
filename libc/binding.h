@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-
 typedef enum {
     Eth,
     Trx,
@@ -13,3 +9,5 @@ typedef enum {
 } Network;
 
 extern char* generate_keychain(Network);
+
+extern void free_c_char(char*);

@@ -5,14 +5,17 @@ package main
 #include "../libc/binding.h"
 */
 import "C"
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-	fmt.Printf("%s\n", C.GoString(C.generate_keychain(C.Eth)))
-	fmt.Printf("%s\n", C.GoString(C.generate_keychain(C.Trx)))
-	fmt.Printf("%s\n", C.GoString(C.generate_keychain(C.Btc)))
-	fmt.Printf("%s\n", C.GoString(C.generate_keychain(C.Ltc)))
-	fmt.Printf("%s\n", C.GoString(C.generate_keychain(C.Sol)))
-	fmt.Printf("%s\n", C.GoString(C.generate_keychain(C.Apt)))
-	fmt.Printf("%s\n", C.GoString(C.generate_keychain(C.Sui)))
+	c_ptr := C.generate_keychain(C.Btc)
+
+	// C.GoString( ... ) creates a copy of the original
+	// string, so we need to free the original
+	defer C.free_c_char(c_ptr)
+
+	go_str := C.GoString(c_ptr)
+	fmt.Println(go_str)
 }
