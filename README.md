@@ -53,7 +53,14 @@ import "C"
 import "fmt"
 
 func main() {
-	fmt.Printf("%s\n", C.GoString(C.generate_keychain(C.Eth)))
+	c_ptr := C.generate_keychain(C.Btc)
+
+    // C.GoString( ... ) creates a copy of the original 
+    // string, so we need to free the original
+	defer C.free_c_char(c_ptr)
+
+	go_str := C.GoString(c_ptr)
+	fmt.Println(go_str)
 	// ..
 }
 ```
@@ -61,14 +68,17 @@ func main() {
 ### [[binding.h](https://github.com/Sssilencee/hex-wallet-gen/blob/main/libc/binding.h)]
 
 ```C
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-
 typedef enum {
     Eth,
-    // ..
+    Trx,
+    Btc,
+    Ltc,
+    Sol,
+    Apt,
+    Sui,
 } Network;
 
 extern char* generate_keychain(Network);
+
+extern void free_c_char(char*);
 ```
